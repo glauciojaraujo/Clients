@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolodona Iza - Doces e Sobremesas Artesanais</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fce7f3;
+        }
+        .modal-overlay {
+            background-color: rgba(0, 0, 0, 0.75);
+            transition: opacity 0.3s ease-in-out;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chosen Palette: Red Velvet & Cream (Fundo: #fce7f3, Vermelho: #b91c1c, Vinho: #7f1d1d, Rosa: #fbcfe8, Amarelo: #fcd34d) -->
+    <!-- Application Structure Plan: A single-page sales funnel with data centralized in a JS object. The structure follows a narrative: Hook (Promise), Products (The Offer), Speciality (Main Products), Testimonials (Social Proof), and a final CTA. The design is optimized for a confectionery brand, using vibrant colors and clear sections to showcase products and encourage orders. -->
+    <!-- Visualization & Content Choices: Content is presented in distinct, scrollable sections. The products section uses a grid to showcase different items, with clear images and descriptions. The primary interactive element is a button that triggers a modal form for orders. This keeps the user on the page and provides a direct call-to-action. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Modal de Encomenda -->
+    <div id="order-modal" class="modal-overlay fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-lg w-full transform scale-95 transition-transform duration-300">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-[#b91c1c]">Faça sua Encomenda</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">&times;</button>
+            </div>
+            <div id="modal-content">
+                <p class="text-gray-700 mb-6">Preencha seus dados e o que gostaria de encomendar.</p>
+                <form id="order-form">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-600 text-sm font-medium mb-1">Nome Completo</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fbcfe8]" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="phone" class="block text-gray-600 text-sm font-medium mb-1">Telefone (WhatsApp)</label>
+                        <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fbcfe8]" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="order" class="block text-gray-600 text-sm font-medium mb-1">Seu Pedido</label>
+                        <textarea id="order" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fbcfe8]" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-[#b91c1c] text-white font-bold py-3 rounded-lg hover:bg-[#7f1d1d] transition-colors duration-300">Enviar Pedido</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção de Gancho (Hero) -->
+    <header class="bg-[#b91c1c] text-white py-20 md:py-32 rounded-b-[4rem] mb-12 shadow-lg">
+        <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
+            <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold leading-tight mb-4"></h1>
+            <p id="hero-subtitle" class="text-lg md:text-xl font-light mb-8 max-w-3xl mx-auto"></p>
+            <div class="mt-8">
+                <button onclick="openModal()" class="bg-[#fcd34d] text-[#b91c1c] font-bold py-4 px-12 rounded-full hover:bg-[#fcd34d]/80 transition-colors duration-300 transform hover:scale-105 shadow-lg">Fazer Encomenda</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 max-w-5xl">
+        <!-- Seção de Produtos -->
+        <section class="bg-white p-8 md:p-12 rounded-2xl shadow-md mb-12 text-center">
+            <h2 id="products-title" class="text-3xl font-bold text-[#b91c1c] mb-8"></h2>
+            <div id="products-section" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </section>
+
+        <!-- Seção de Especialidades -->
+        <section class="bg-[#7f1d1d] text-white p-8 md:p-12 rounded-2xl shadow-md mb-12 text-center">
+            <h2 id="specialty-title" class="text-3xl font-bold mb-8"></h2>
+            <p id="specialty-description" class="text-lg font-light mb-8 max-w-3xl mx-auto"></p>
+            <div id="specialty-items" class="flex flex-wrap justify-center items-center gap-8"></div>
+        </section>
+
+        <!-- Seção de Depoimentos -->
+        <section class="bg-white p-8 md:p-12 rounded-2xl shadow-md mb-12">
+            <h2 id="testimonials-title" class="text-3xl font-bold text-[#b91c1c] text-center mb-8"></h2>
+            <div id="testimonials-section" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        </section>
+
+        <!-- Seção Final de CTA -->
+        <section class="bg-white p-8 md:p-12 rounded-2xl shadow-md text-center mb-12">
+            <h2 id="cta-final-title" class="text-3xl font-bold text-[#b91c1c] mb-4"></h2>
+            <p id="cta-final-text" class="text-gray-700 mb-8 max-w-3xl mx-auto"></p>
+            <button onclick="openModal()" class="bg-[#b91c1c] text-white font-bold py-4 px-12 rounded-full hover:bg-[#7f1d1d] transition-colors duration-300 transform hover:scale-105 shadow-lg">Encomendar Agora</button>
+        </section>
+    </main>
+    
+    <footer class="text-center text-gray-500 text-sm py-8">
+        <p id="footer-text"></p>
+    </footer>
+
+    <script>
+        const dadosDaPagina = {
+            gancho: {
+                titulo: "Doces e Sobremesas que Trazem a Verdadeira Felicidade!",
+                subtitulo: "A Bolodona Iza oferece delícias artesanais feitas com carinho, frescor e os melhores ingredientes para adoçar sua vida."
+            },
+            produtos: {
+                titulo: "Nossas Delícias Sob Encomenda",
+                itens: [
+                    {
+                        imagem: "https://placehold.co/600x400/b91c1c/ffffff?text=Bolo+de+Pote",
+                        nome: "Bolo de Pote",
+                        descricao: "A perfeição em camadas de sabor. Cremoso, úmido e feito para encantar."
+                    },
+                    {
+                        imagem: "https://placehold.co/600x400/fbcfe8/7f1d1d?text=Bolo+de+Taça",
+                        nome: "Bolo de Taça",
+                        descricao: "A elegância e o sabor reunidos em uma sobremesa inesquecível, ideal para festas e eventos."
+                    },
+                    {
+                        imagem: "https://placehold.co/600x400/fcd34d/7f1d1d?text=Docinhos",
+                        nome: "Docinhos",
+                        descricao: "Pequenas mordidas de felicidade. Tradicionais, gourmet e feitos para adoçar qualquer ocasião."
+                    }
+                ]
+            },
+            especialidade: {
+                titulo: "A Nossa Especialidade",
+                descricao: "Na Bolodona Iza, transformamos ingredientes simples em experiências inesquecíveis. Nosso segredo? A paixão em cada detalhe e a qualidade em cada sabor."
+            },
+            sabores: [
+                {
+                    nome: "Chocolate",
+                    descricao: "Intenso e puro, para os verdadeiros amantes de cacau."
+                },
+                {
+                    nome: "Morango",
+                    descricao: "Um toque frutado e cremoso, a leveza que refresca."
+                },
+                {
+                    nome: "Baunilha",
+                    descricao: "Um clássico suave e elegante, perfeito para todas as ocasiões."
+                }
+            ],
+            depoimentos: {
+                titulo: "O que dizem os nossos clientes:",
+                itens: [
+                    {
+                        texto: "Os bolos de pote da Bolodona Iza são simplesmente divinos! A cada colherada, uma explosão de sabor. Recomendo de olhos fechados!",
+                        autor: "Maria S."
+                    },
+                    {
+                        texto: "Encomendei os docinhos para uma festa e foi um sucesso absoluto. Além de lindos, estavam fresquinhos e deliciosos. A Iza tem um talento incrível!",
+                        autor: "João P."
+                    }
+                ]
+            },
+            ctaFinal: {
+                titulo: "Adoce sua Vida com Bolodona Iza!",
+                texto: "Não perca tempo! Faça sua encomenda de bolos e doces para sua próxima celebração ou para adoçar o seu dia. A felicidade está a apenas um clique de distância."
+            },
+            rodape: "© 2024 Bolodona Iza. Todos os direitos reservados."
+        };
+
+        const modal = document.getElementById('order-modal');
+        const modalContent = document.getElementById('modal-content');
+
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            modalContent.innerHTML = `
+                <p class="text-gray-700 mb-6">Preencha seus dados e o que gostaria de encomendar.</p>
+                <form id="order-form">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-600 text-sm font-medium mb-1">Nome Completo</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fbcfe8]" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="phone" class="block text-gray-600 text-sm font-medium mb-1">Telefone (WhatsApp)</label>
+                        <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fbcfe8]" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="order" class="block text-gray-600 text-sm font-medium mb-1">Seu Pedido</label>
+                        <textarea id="order" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#fbcfe8]" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-[#b91c1c] text-white font-bold py-3 rounded-lg hover:bg-[#7f1d1d] transition-colors duration-300">Enviar Pedido</button>
+                </form>
+            `;
+            document.getElementById('order-form').addEventListener('submit', handleOrder);
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleOrder(event) {
+            event.preventDefault();
+            modalContent.innerHTML = `
+                <div class="text-center p-8">
+                    <h3 class="text-2xl font-bold text-[#b91c1c] mb-4">Pedido Enviado com Sucesso!</h3>
+                    <p class="text-gray-700 mb-6">A Bolodona Iza entrará em contato em breve para confirmar a sua encomenda.</p>
+                    <button onclick="closeModal()" class="bg-[#b91c1c] text-white font-bold py-3 px-8 rounded-full hover:bg-[#7f1d1d] transition-colors duration-300">Fechar</button>
+                </div>
+            `;
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        function renderPage(data) {
+            const sections = {
+                'hero-title': data.gancho.titulo,
+                'hero-subtitle': data.gancho.subtitulo,
+                'products-title': data.produtos.titulo,
+                'specialty-title': data.especialidade.titulo,
+                'specialty-description': data.especialidade.descricao,
+                'testimonials-title': data.depoimentos.titulo,
+                'cta-final-title': data.ctaFinal.titulo,
+                'cta-final-text': data.ctaFinal.texto,
+                'footer-text': data.rodape
+            };
+
+            for (const id in sections) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerText = sections[id];
+                }
+            }
+
+            // Render products
+            const productsSection = document.getElementById('products-section');
+            if (productsSection) {
+                productsSection.innerHTML = data.produtos.itens.map(p => `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm text-center">
+                        <img src="${p.imagem}" alt="${p.nome}" class="w-full h-auto mb-4 rounded-lg">
+                        <h3 class="font-bold text-lg text-[#b91c1c] mb-2">${p.nome}</h3>
+                        <p class="text-gray-700">${p.descricao}</p>
+                    </div>
+                `).join('');
+            }
+            
+            // Render specialty items
+            const specialtyItems = document.getElementById('specialty-items');
+            if (specialtyItems) {
+                specialtyItems.innerHTML = data.sabores.map(s => `
+                    <div class="p-4 rounded-lg bg-white bg-opacity-20 shadow-lg text-white text-center w-40">
+                        <h4 class="font-bold text-lg">${s.nome}</h4>
+                        <p class="text-sm">${s.descricao}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Render testimonials
+            const testimonialsSection = document.getElementById('testimonials-section');
+            if (testimonialsSection) {
+                testimonialsSection.innerHTML = data.depoimentos.itens.map(t => `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm">
+                        <p class="text-gray-700 italic mb-4">"${t.texto}"</p>
+                        <p class="font-bold text-[#b91c1c]">- ${t.autor}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        window.onload = () => {
+            renderPage(dadosDaPagina);
+        };
+    </script>
+</body>
+</html>
+```
