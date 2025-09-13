@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bolodona Iza - Doces e Sobremesas Artesanais</title>
+    <title>Bolodona - Doces e Sobremesas Artesanais</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,6 +62,9 @@
     <!-- Seção de Gancho (Hero) -->
     <header class="bg-[#b91c1c] text-white py-20 md:py-32 rounded-b-[4rem] mb-12 shadow-lg">
         <div class="container mx-auto px-4 md:px-8 max-w-5xl text-center">
+            <!-- Adicionar a Logomarca Aqui -->
+            <img id="logo" src="https://placehold.co/150x150/fbcfe8/7f1d1d?text=Logo+Iza" alt="Logomarca Bolodona Iza" class="mx-auto mb-8 w-32 h-32 md:w-40 md:h-40 rounded-full shadow-lg object-cover">
+            
             <h1 id="hero-title" class="text-4xl md:text-6xl font-extrabold leading-tight mb-4"></h1>
             <p id="hero-subtitle" class="text-lg md:text-xl font-light mb-8 max-w-3xl mx-auto"></p>
             <div class="mt-8">
@@ -105,7 +108,7 @@
     <script>
         const dadosDaPagina = {
             gancho: {
-                titulo: "Doces e Sobremesas que Trazem a Verdadeira Felicidade até você!",
+                titulo: "Doces e Sobremesas que Trazem a Verdadeira Felicidade até Você!",
                 subtitulo: "A Bolodona oferece delícias artesanais feitas com carinho, frescor e os melhores ingredientes para adoçar sua vida."
             },
             produtos: {
@@ -130,7 +133,7 @@
             },
             especialidade: {
                 titulo: "A Nossa Especialidade",
-                descricao: "Na Bolodona Iza, transformamos ingredientes simples em experiências inesquecíveis. Nosso segredo? A paixão em cada detalhe e a qualidade em cada sabor."
+                descricao: "Na Bolodona, transformamos ingredientes simples em experiências inesquecíveis. Nosso segredo? A paixão em cada detalhe e a qualidade em cada sabor."
             },
             sabores: [
                 {
@@ -150,7 +153,7 @@
                 titulo: "O que dizem os nossos clientes:",
                 itens: [
                     {
-                        texto: "Os bolos de pote da Bolodona Iza são simplesmente divinos! A cada colherada, uma explosão de sabor. Recomendo de olhos fechados!",
+                        texto: "Os bolos de pote da Bolodona são simplesmente divinos! A cada colherada, uma explosão de sabor. Recomendo de olhos fechados!",
                         autor: "Maria S."
                     },
                     {
@@ -160,10 +163,10 @@
                 ]
             },
             ctaFinal: {
-                titulo: "Adoce sua Vida com Bolodona Iza!",
+                titulo: "Adoce sua Vida com Bolodona!",
                 texto: "Não perca tempo! Faça sua encomenda de bolos e doces para sua próxima celebração ou para adoçar o seu dia. A felicidade está a apenas um clique de distância."
             },
-            rodape: "© 2024 Bolodona Iza. Todos os direitos reservados."
+            rodape: "© 2024 Bolodona. Todos os direitos reservados."
         };
 
         const modal = document.getElementById('order-modal');
@@ -203,7 +206,7 @@
             modalContent.innerHTML = `
                 <div class="text-center p-8">
                     <h3 class="text-2xl font-bold text-[#b91c1c] mb-4">Pedido Enviado com Sucesso!</h3>
-                    <p class="text-gray-700 mb-6">A Bolodona Iza entrará em contato em breve para confirmar a sua encomenda.</p>
+                    <p class="text-gray-700 mb-6">A Bolodona entrará em contato em breve para confirmar a sua encomenda.</p>
                     <button onclick="closeModal()" class="bg-[#b91c1c] text-white font-bold py-3 px-8 rounded-full hover:bg-[#7f1d1d] transition-colors duration-300">Fechar</button>
                 </div>
             `;
@@ -276,5 +279,3 @@
     </script>
 </body>
 </html>
-
-```
