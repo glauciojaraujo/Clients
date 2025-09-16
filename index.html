@@ -97,7 +97,7 @@
         <section class="bg-[#7f1d1d] text-white p-8 md:p-12 rounded-2xl shadow-md mb-12 text-center">
             <h2 id="specialty-title" class="text-3xl font-bold mb-8"></h2>
             <p id="specialty-description" class="text-lg font-light mb-8 max-w-3xl mx-auto"></p>
-            <div id="specialty-items" class="flex flex-wrap justify-center items-center gap-8"></div>
+            <div class="flex flex-wrap justify-center items-start gap-8 md:gap-12" id="specialty-items"></div>
         </section>
 
         <!-- Seção de Depoimentos -->
@@ -176,16 +176,16 @@
             },
             sabores: [
                 {
-                    nome: "Chocolate",
-                    descricao: "Intenso e puro, para os verdadeiros amantes de cacau."
+                    tipo: "Bolo de Pote",
+                    sabores: ["Morango com Chocolate", "Laka", "Paçoca", "Maracujá com Laka", "Prestígio", "Ninho com Morango", "Banana", "Oreo", "Cappuccino", "Limão", "Crocante"]
                 },
                 {
-                    nome: "Morango",
-                    descricao: "Um toque frutado e cremoso, a leveza que refresca."
+                    tipo: "Bolo de Taça",
+                    sabores: ["Chocolate com Morango", "Cappuccino", "Leite Ninho", "Prestígio", "Paçoca"]
                 },
                 {
-                    nome: "Baunilha",
-                    descricao: "Um clássico suave e elegante, perfeito para todas as ocasiões."
+                    tipo: "Docinhos",
+                    sabores: ["Brigadeiro", "Brigadeirão", "Bolo de chocolate com cenoura", "raspa de bolo que só Seu Edgard, Carol e Cintia come"]
                 }
             ],
             depoimentos: {
@@ -315,8 +315,8 @@
             if (specialtyItems) {
                 specialtyItems.innerHTML = data.sabores.map(s => `
                     <div class="p-4 rounded-lg bg-white bg-opacity-20 shadow-lg text-white text-center w-40">
-                        <h4 class="font-bold text-lg">${s.nome}</h4>
-                        <p class="text-sm">${s.descricao}</p>
+                        <h4 class="font-bold text-lg">${s.tipo}</h4>
+                        <p class="text-sm">${s.sabores.join(', ')}</p>
                     </div>
                 `).join('');
             }
@@ -339,4 +339,3 @@
     </script>
 </body>
 </html>
-```
