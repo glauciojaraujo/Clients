@@ -106,6 +106,17 @@
             <div id="testimonials-section" class="grid grid-cols-1 md:grid-cols-2 gap-8"></div>
         </section>
 
+        <!-- Seção do Autor -->
+        <section class="bg-white p-8 md:p-12 rounded-2xl shadow-md mb-12 flex flex-col md:flex-row items-center gap-8">
+            <div class="w-32 h-32 md:w-48 md:h-48 overflow-hidden flex-shrink-0 rounded-full">
+                <img id="author-image" alt="Foto da Iza" class="w-full h-full object-cover rounded-full" style="object-position: top;">
+            </div>
+            <div class="text-center md:text-left">
+                <h2 id="author-name" class="text-3xl font-bold text-[#b91c1c] mb-2"></h2>
+                <p id="author-bio" class="text-gray-700 leading-relaxed"></p>
+            </div>
+        </section>
+
         <!-- Seção Final de CTA -->
         <section class="bg-white p-8 md:p-12 rounded-2xl shadow-md text-center mb-12">
             <h2 id="cta-final-title" class="text-3xl font-bold text-[#b91c1c] mb-4"></h2>
@@ -194,6 +205,12 @@
                 titulo: "Adoce sua Vida com Bolodona!",
                 texto: "Não perca tempo! Faça sua encomenda de bolos e doces para sua próxima celebração ou para adoçar o seu dia. A felicidade está a apenas um clique de distância."
             },
+            autor: {
+                titulo: "Quem é a dona da Bolodona?",
+                imagem: "https://drive.google.com/thumbnail?id=14aZN06Xx4XdLQUdi2qYyjyYQPGQnNzR4",
+                nome: "Iza",
+                bio: "Oi, eu sou a Iza! A fundadora da Bolodona. Com mais de 20 anos de experiência na arte da confeitaria, transformo ingredientes em experiências inesquecíveis. Cada receita é uma história, e cada doce é feito com o carinho que eu gostaria de receber. Acredito que os melhores momentos da vida são celebrados com algo doce. Minha missão é levar um pouco dessa paixão para a sua casa e para as suas celebrações."
+            },
             rodape: "© 2024 Bolodona. Todos os direitos reservados."
         };
 
@@ -256,8 +273,21 @@
                 'testimonials-title': data.depoimentos.titulo,
                 'cta-final-title': data.ctaFinal.titulo,
                 'cta-final-text': data.ctaFinal.texto,
+                'author-name': data.autor.nome,
+                'author-bio': data.autor.bio,
                 'footer-text': data.rodape
             };
+
+            // Set the author image and title
+            const authorImage = document.getElementById('author-image');
+            if (authorImage) {
+                authorImage.src = data.autor.imagem;
+                authorImage.alt = `Foto da ${data.autor.nome}`;
+            }
+            const authorTitle = document.getElementById('author-name');
+            if (authorTitle) {
+                authorTitle.innerText = data.autor.titulo;
+            }
 
             for (const id in sections) {
                 const element = document.getElementById(id);
