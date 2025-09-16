@@ -23,6 +23,19 @@
             opacity: 1;
             visibility: visible;
         }
+        .image-container {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .image-container img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -115,32 +128,32 @@
                 titulo: "Nossas Delícias Sob Encomenda",
                 itens: [
                     {
-                        imagem: "https://drive.google.com/thumbnail?id=11gUm5HNcLsnE3njwXhcTvRaO2nkzACzj",
-                        nome: "Chocolate",
-                        descricao: "Delicioso bolo de chocolate, rico e fofinho. Uma paixão para os amantes de cacau."
+                        imagem: "https://drive.google.com/thumbnail?id=1K-iiGSbsa5CxNIPA4CD4uWDZJYltXJax",
+                        nome: "Morango com Chocolate",
+                        descricao: "Delicioso bolo, rico e fofinho. Uma paixão para os amantes de cacau, com morangos fresquinhos e deliciosos."
+                    },
+                    {
+                        imagem: "https://drive.google.com/thumbnail?id=1ZyLzdpH32V5BaliG6Le4E19vjp8eFpna",
+                        nome: "Cappuccino",
+                        descricao: "Cremoso, saboroso e com a doçura do café, perfeito para acompanhar qualquer momento."
                     },
                     {
                         imagem: "https://drive.google.com/thumbnail?id=1_1FXrhkky30bKy7Ls7LrYdu8AX9adn6s",
-                        nome: "Morango",
-                        descricao: "Um bolo irresistível com a doçura e a acidez perfeita dos morangos frescos."
+                        nome: "Maracujá",
+                        descricao: "Um sabor tropical, com a acidez e o frescor da fruta, para um deleite inesquecível."
                     },
                     {
-                        imagem: "https://drive.google.com/thumbnail?id=1_1FXrhkky30bKy7Ls7LrYdu8AX9adn6s",
-                        nome: "Baunilha",
-                        descricao: "O clássico suave e elegante, perfeito para todas as ocasiões e decorações."
-                    },
-                    {
-                        imagem: "https://placehold.co/600x400/b91c1c/ffffff?text=Bolo+de+Pote",
+                        imagem: "https://drive.google.com/thumbnail?id=1Bmgv5G0Z5c1CJ9MtwT_x4GYEwz8c3pDX",
                         nome: "Bolo de Pote",
                         descricao: "A perfeição em camadas de sabor. Cremoso, úmido e feito para encantar."
                     },
                     {
-                        imagem: "https://placehold.co/600x400/fbcfe8/7f1d1d?text=Bolo+de+Taça",
+                        imagem: "https://drive.google.com/thumbnail?id=1ZGbMzCT50f4bIxN5gSA26X8k_rlkxhyw",
                         nome: "Bolo de Taça",
                         descricao: "A elegância e o sabor reunidos em uma sobremesa inesquecível, ideal para festas e eventos."
                     },
                     {
-                        imagem: "https://placehold.co/600x400/fcd34d/7f1d1d?text=Docinhos",
+                        imagem: "https://drive.google.com/thumbnail?id=1_JaVm4dpw0vM_Jq8ufd2YfZllfoXsHOb",
                         nome: "Docinhos",
                         descricao: "Pequenas mordidas de felicidade. Tradicionais, gourmet e feitos para adoçar qualquer ocasião."
                     }
@@ -257,8 +270,10 @@
             const productsSection = document.getElementById('products-section');
             if (productsSection) {
                 productsSection.innerHTML = data.produtos.itens.map(p => `
-                    <div class="bg-white p-6 rounded-2xl shadow-sm text-center">
-                        <img src="${p.imagem}" alt="${p.nome}" class="w-full h-auto mb-4 rounded-lg">
+                    <div class="bg-white p-6 rounded-2xl shadow-sm text-center flex flex-col items-center">
+                        <div class="image-container mb-4">
+                            <img src="${p.imagem}" alt="${p.nome}" class="w-full h-full object-cover rounded-lg">
+                        </div>
                         <h3 class="font-bold text-lg text-[#b91c1c] mb-2">${p.nome}</h3>
                         <p class="text-gray-700">${p.descricao}</p>
                     </div>
@@ -294,3 +309,4 @@
     </script>
 </body>
 </html>
+```
